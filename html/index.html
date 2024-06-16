@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header class="container">
+      <h1 class="mx-auto text-center text-white bg-black rounded w-50 my-5">
+        BÀI TẬP JS - phần 2
+      </h1>
+      <br />
+      <h2 class="mx-auto text-center text-danger w-25 mb-5">
+        ** Có tiến hành bắt lỗi
+      </h2>
+    </header>
+
+    <!-- BÀI 1: QUẢN LÝ TUYỂN SINH
+    Cho người dùng nhập vào điểm trúng tuyển, điểm 3 môn, cho phép chọn 
+    khu vực và đối tượng thí sinh để xác định điểm cộng thêm, xuất ra
+    kết quả điểm trung bình 3 môn và cho biết thí sinh đó có trúng tuyển
+    hay không -->
+
+    <section class="container">
+      <h3 class="mt-5">
+        Bài 1: Quản lý tuyển sinh, cho người dùng nhập vào điểm trúng tuyển,
+        điểm 3 môn, cho phép chọn khu vực và đối tượng thí sinh để xác định điểm
+        cộng thêm, xuất ra kết quả điểm trung bình 3 môn và cho biết thí sinh đó
+        có trúng tuyển hay không
+      </h3>
+      <br />
+      <table class="table text-center table-bordered table-info border-danger">
+        <thead>
+          <tr>
+            <th scope="col" colspan="4">Khu vực</th>
+            <th scope="col" colspan="4">Đối tượng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>X (Không ưu tiên)</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>0 (Không ưu tiên)</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>0.5</td>
+            <td>0</td>
+            <td>2.5</td>
+            <td>1.5</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card w-50 mt-4 mx-auto">
+        <div class="card-header text-center text-white bg-success">
+          Quản lý tuyển sinh
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <p class="pt-2 me-3">Điểm chuẩn:</p>
+                <input style="width: 50px" type="number" id="diemChuan" />
+              </div>
+            </div>
+            <div class="col-4">
+              <select
+                class="form-select my-1"
+                id="khuVuc"
+                aria-label="Default select example"
+              >
+                <option selected>Chọn khu vực</option>
+                <option value="2">A</option>
+                <option value="1">B</option>
+                <option value="0.5">C</option>
+                <option value="0">X</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <select
+                class="form-select my-1"
+                id="doiTuong"
+                aria-label="Default select example"
+              >
+                <option selected>Chọn đối tượng</option>
+                <option value="2.5">1</option>
+                <option value="1.5">2</option>
+                <option value="1">3</option>
+                <option value="0">0</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <p class="pt-2 me-3">Điểm môn 1:</p>
+                <input style="width: 50px" type="number" id="diemMon1" />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <p class="pt-2 me-3">Điểm môn 2:</p>
+                <input style="width: 50px" type="number" id="diemMon2" />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <p class="pt-2 me-3">Điểm môn 3:</p>
+                <input style="width: 50px" type="number" id="diemMon3" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <button
+            id="tinhDiem"
+            class="bg-success text-white text-center rounded p-2 border-0 w-25 me-3"
+          >
+            Tính điểm
+          </button>
+          <br />
+          <span id="ketQua"></span>
+        </div>
+      </div>
+      <hr />
+    </section>
+
+    <!-- BÀI 2: TÍNH TIỀN DIỆN 
+      Nhập vào tên và tổng số điện tiêu thu (kW) 
+      Xuất ra tên khách và tổng tiền phải trả -->
+
+    <section class="container">
+      <h3 class="mt-5">
+        Bài 2: Tính tiền điện, nhập vào tên và tổng số điện tiêu thụ (kW), xuất
+        ra tên khách và tổng tiền phải trả dựa theo bảng giá điện bên dưới
+      </h3>
+      <br />
+      <table class="table text-center table-bordered table-info border-danger">
+        <thead>
+          <tr>
+            <th scope="col" colspan="5">Bảng giá điện</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1kW-50kW</td>
+            <td>51kW-100kW</td>
+            <td>101kW-150kW</td>
+            <td>151kW-200kW</td>
+            <td>201kW trở lên</td>
+          </tr>
+          <tr>
+            <td>500đ/kW</td>
+            <td>650đ/kW</td>
+            <td>850đ/kW</td>
+            <td>1100đ/kW</td>
+            <td>1300đ/kW</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card w-50 mt-4 mx-auto">
+        <div class="card-header text-center text-white bg-success">
+          Tính tiền điện
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Tên khách hàng:</p>
+                <input type="text" id="tenKH" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Tổng số tiêu thụ:</p>
+                <input type="number" id="tong_kW" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <button
+            id="tinhTienDien"
+            class="bg-success text-white text-center rounded p-2 border-0 w-25 me-3"
+          >
+            Tính tiền
+          </button>
+          <br />
+          <span id="tienDien"></span>
+        </div>
+      </div>
+      <hr />
+    </section>
+
+    <!-- BẢI 3: TÍNH THUẾ THU NHẬP CÁ NHÂN 
+    Nhập vào họ tên, tổng thu nhập năm, số người phụ thuộc
+    Tính thuế thu nhập cá nhân phải trả -->
+
+    <section class="container">
+      <h3 class="mt-5">
+        Bài 3: Tính thuế thu nhập cá nhân, nhập vào họ tên, tổng thu nhập năm,
+        số người phụ thuộc. Tính thuế thu nhập cá nhân phải trả
+      </h3>
+      <br />
+      <h4 class="text-primary">
+        Thu nhập chịu thuế = Tổng thu nhập năm - 4tr - Số người phụ thuộc *
+        1.6tr
+      </h4>
+      <br />
+      <table
+        class="table text-center table-bordered table-info border-danger w-50"
+      >
+        <thead>
+          <tr>
+            <th scope="col">Thu nhập chịu thuế (triệu)</th>
+            <th scope="col">Thuế suất (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Đến 60</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>61-120</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>121-210</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>211-384</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>385-624</td>
+            <td>25</td>
+          </tr>
+          <tr>
+            <td>625-960</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>Trên 960</td>
+            <td>35</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card w-75 mt-4 mx-auto">
+        <div class="card-header text-center text-white bg-success">
+          Tính thuế thu nhập cá nhân
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Họ tên cá nhân:</p>
+                <input type="text" id="hoTen" />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Tổng thu nhập năm:</p>
+                <input type="number" id="tongThuNhapNam" />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Số người phụ thuộc:</p>
+                <input type="number" id="soNguoiPhuThuoc" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <button
+            id="tinhTienThue"
+            class="bg-success text-white text-center rounded p-2 border-0 w-25 me-3"
+          >
+            Tính thuế
+          </button>
+          <br />
+          <span id="tienThue"></span>
+        </div>
+      </div>
+      <hr />
+    </section>
+
+    <!-- BÀI 4: TÍNH TIỀN CÁP
+    Tính hóa đơn khách hàng của một công ty cáp. Phân chia ra nhà dân
+    và doanh nghiệp. Với mức giá tương ứng ở bảng bên dưới: -->
+
+    <section class="container">
+      <h3 class="mt-5">
+        Bài 4: Tính tiền cáp, tính hóa đơn khách hàng của một công ty cáp. Phân
+        chia ra nhà dân và doanh nghiệp. Với mức giá tương ứng ở bảng bên dưới:
+      </h3>
+      <br />
+      <br />
+      <table
+        class="table text-center table-bordered table-info border-danger w-75"
+      >
+        <thead>
+          <tr>
+            <th></th>
+            <th scope="col">Phí xử lý hóa đơn</th>
+            <th scope="col">Phí dịch vụ cơ bản</th>
+            <th scope="col">Thuê kênh cao cấp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Nhà dân</th>
+            <td>4.5$</td>
+            <td>20.5$</td>
+            <td>7.5$/kênh</td>
+          </tr>
+          <tr>
+            <th>Doanh nghiệp</th>
+            <td>15$</td>
+            <td>
+              75$ cho 10 kết nối đầu, từ kết nối thứ 11 tính thêm 5$/kết nối
+            </td>
+            <td>50$/kênh</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="card w-100 mt-4 mx-auto">
+        <div class="card-header text-center text-white bg-success">
+          Tính tiền cáp
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Mã KH:</p>
+                <input type="text" id="maKH" class="w-50" />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3 w-50">Loại KH:</p>
+                <select
+                  class="form-select"
+                  id="loaiKH"
+                  aria-label="Default select example"
+                >
+                  <option selected>Chọn loại khách hàng</option>
+                  <option value="20.5">Nhà dân</option>
+                  <option value="75">Doanh nghiệp</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Số kết nối:</p>
+                <input type="number" id="soKetNoi" class="w-50" disabled />
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex align-items-center">
+                <p class="pt-2 me-3">Số kênh cao cấp:</p>
+                <input type="number" id="soKenhCaoCap" class="w-50" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+          <button
+            id="tinhTienCap"
+            class="bg-success text-white text-center rounded p-2 border-0 w-25 me-3"
+          >
+            Tính tiền
+          </button>
+          <br />
+          <span id="tienCap"></span>
+        </div>
+      </div>
+      <hr />
+    </section>
+
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../js/index.js"></script>
+  </body>
+</html>
